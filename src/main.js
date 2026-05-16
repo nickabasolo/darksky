@@ -3,8 +3,11 @@ import 'leaflet/dist/leaflet.css'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch'
+import 'leaflet-geosearch/dist/geosearch.css'
 import { LIGHT_POLLUTION_LAYERS, DEFAULT_LAYER } from './layers.js'
 import { setupGeolocation } from './geolocation.js'
+import { sampleLightLevel, classifyLocation } from './lightLevel.js'
 import './style.css'
 
 // Vite's asset hashing breaks Leaflet's internal icon URL resolution.
@@ -56,6 +59,41 @@ layerSelect.addEventListener('change', () => {
   lightLayer = makeLayer(layerSelect.value, opacity).addTo(map)
 })
 
+const searchControl = new GeoSearchControl({
+  provider: new OpenStreetMapProvider(),
+  style: 'bar',
+  showMarker: false,
+  autoClose: true,
+  keepResult: true,
+})
+map.addControl(searchControl)
+
+let activeMarker = null
+function placeMarker(lat, lng, label) {
+  if (activeMarker) map.removeLayer(activeMarker)
+  activeMarker = L.marker([lat, lng]).addTo(map).bindPopup(label).openPopup()
+}
+
+map.on('geosearch/showlocation', async (result) => {
+  const { y: lat, x: lng, label, raw } = result.location
+  placeMarker(lat, lng, label)
+  const locationType = classifyLocation(raw)
+  if (locationType === 'region') {
+    activeMarker.setPopupContent(`${label}<br><br>Light levels may vary in this region.`)
+    activeMarker.openPopup()
+    return
+  }
+  const year = layerSelect.value
+  try {
+    const zone = await sampleLightLevel(lat, lng, year)
+    activeMarker.setPopupContent(`${label}<br><br>Light Pollution: Zone ${zone.zone}<br>LPI: ${zone.lpiRange}<br>Sky quality: ${zone.sqm} mag/arcsec²`)
+    activeMarker.openPopup()
+  } catch {
+    activeMarker.setPopupContent(`${label}<br><br>Light level unavailable`)
+    activeMarker.openPopup()
+  }
+})
+
 setupGeolocation(map, (lat, lng) => {
-  L.marker([lat, lng]).addTo(map).bindPopup('You are here').openPopup()
+  placeMarker(lat, lng, 'You are here')
 })
