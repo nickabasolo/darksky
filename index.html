@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dark Sky Finder</title>
+</head>
+<body>
+  <div id="map"></div>
+
+  <div id="ui-panel">
+    <h2>Dark Sky Finder</h2>
+
+    <button id="locate-btn">Find My Location</button>
+
+    <div class="control-group">
+      <label for="opacity-slider">Light Pollution Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="100" value="70" />
+    </div>
+
+    <div class="control-group">
+      <label for="layer-select">Year</label>
+      <select id="layer-select">
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2020">2020</option>
+        <option value="2016">2016</option>
+      </select>
+    </div>
+
+    <div id="location-info"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
