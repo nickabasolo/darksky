@@ -8,28 +8,37 @@
 <body>
   <div id="map"></div>
 
-  <div id="ui-panel">
-    <h2>Dark Sky Finder</h2>
+  <div id="controls">
+    <div id="search-panel">
+      <div id="search-wrap">
+        <button id="search-icon-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <input id="search-input" type="text" placeholder="Search" autocomplete="off" />
+        <button id="search-clear" aria-label="Clear" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <ul id="search-suggestions" hidden></ul>
+      <div id="info-body" hidden></div>
+    </div>
 
-    <button id="locate-btn">Find My Location</button>
+    <button id="locate-btn" aria-label="Find my location">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    </button>
+  </div>
 
-    <div class="control-group">
-      <label for="opacity-slider">Light Pollution Opacity</label>
+  <div id="map-controls">
+    <div id="opacity-wrap" hidden>
       <input type="range" id="opacity-slider" min="0" max="100" value="70" />
     </div>
-
-    <div class="control-group">
-      <label for="layer-select">Year</label>
-      <select id="layer-select">
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2020">2020</option>
-        <option value="2016">2016</option>
-      </select>
+    <button id="opacity-btn" aria-label="Adjust opacity">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <div id="zoom-controls">
+      <button id="zoom-in" aria-label="Zoom in">+</button>
+      <button id="zoom-out" aria-label="Zoom out">−</button>
     </div>
-
-    <div id="location-info"></div>
   </div>
 
   <script type="module" src="/src/main.js"></script>
