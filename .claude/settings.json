@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s http://localhost:5174/darksky/ -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:5175/darksky/ -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:5174/darksky/)",
+      "Bash(curl -s \"http://localhost:5174/src/map.js\")",
+      "Bash(curl -s \"http://localhost:5174/src/App.jsx\")",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(npm uninstall *)"
+    ]
+  }
+}

@@ -9,6 +9,7 @@ export const map = L.map('map', {
   center: [38, -97],
   zoom: 4,
   zoomControl: false,
+  attributionControl: false,
 })
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {

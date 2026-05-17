@@ -16,21 +16,21 @@ export function classifyLocation(raw) {
 }
 
 const ZONES = [
-  { zone: '0',  hex: '#000000', lpiRange: '<0.01',      sqm: '22.00–21.99' },
-  { zone: '1a', hex: '#222222', lpiRange: '0.01–0.06',  sqm: '21.99–21.93' },
-  { zone: '1b', hex: '#424242', lpiRange: '0.06–0.11',  sqm: '21.93–21.89' },
-  { zone: '2a', hex: '#142F72', lpiRange: '0.11–0.19',  sqm: '21.89–21.81' },
-  { zone: '2b', hex: '#2154D8', lpiRange: '0.19–0.33',  sqm: '21.81–21.69' },
-  { zone: '3a', hex: '#0F5714', lpiRange: '0.33–0.58',  sqm: '21.69–21.51' },
-  { zone: '3b', hex: '#1FA12A', lpiRange: '0.58–1.00',  sqm: '21.51–21.25' },
-  { zone: '4a', hex: '#6E641E', lpiRange: '1.00–1.73',  sqm: '21.25–20.91' },
-  { zone: '4b', hex: '#B8A625', lpiRange: '1.73–3.00',  sqm: '20.91–20.49' },
-  { zone: '5a', hex: '#BF641E', lpiRange: '3.00–5.20',  sqm: '20.49–20.02' },
-  { zone: '5b', hex: '#FD9650', lpiRange: '5.20–9.00',  sqm: '20.02–19.50' },
-  { zone: '6a', hex: '#FB5A49', lpiRange: '9.00–15.59', sqm: '19.50–18.95' },
-  { zone: '6b', hex: '#FB998A', lpiRange: '15.59–27.00',sqm: '18.95–18.38' },
-  { zone: '7a', hex: '#A0A0A0', lpiRange: '27.00–46.77',sqm: '18.38–17.80' },
-  { zone: '7b', hex: '#F2F2F2', lpiRange: '>46.77',     sqm: '<17.80' },
+  { zone: '0',  score: 1,  hex: '#000000', lpiRange: '<0.01',       sqm: '22.00–21.99' },
+  { zone: '1a', score: 2,  hex: '#222222', lpiRange: '0.01–0.06',   sqm: '21.99–21.93' },
+  { zone: '1b', score: 3,  hex: '#424242', lpiRange: '0.06–0.11',   sqm: '21.93–21.89' },
+  { zone: '2a', score: 4,  hex: '#142F72', lpiRange: '0.11–0.19',   sqm: '21.89–21.81' },
+  { zone: '2b', score: 5,  hex: '#2154D8', lpiRange: '0.19–0.33',   sqm: '21.81–21.69' },
+  { zone: '3a', score: 6,  hex: '#0F5714', lpiRange: '0.33–0.58',   sqm: '21.69–21.51' },
+  { zone: '3b', score: 7,  hex: '#1FA12A', lpiRange: '0.58–1.00',   sqm: '21.51–21.25' },
+  { zone: '4a', score: 8,  hex: '#6E641E', lpiRange: '1.00–1.73',   sqm: '21.25–20.91' },
+  { zone: '4b', score: 9,  hex: '#B8A625', lpiRange: '1.73–3.00',   sqm: '20.91–20.49' },
+  { zone: '5a', score: 10, hex: '#BF641E', lpiRange: '3.00–5.20',   sqm: '20.49–20.02' },
+  { zone: '5b', score: 11, hex: '#FD9650', lpiRange: '5.20–9.00',   sqm: '20.02–19.50' },
+  { zone: '6a', score: 12, hex: '#FB5A49', lpiRange: '9.00–15.59',  sqm: '19.50–18.95' },
+  { zone: '6b', score: 13, hex: '#FB998A', lpiRange: '15.59–27.00', sqm: '18.95–18.38' },
+  { zone: '7a', score: 14, hex: '#A0A0A0', lpiRange: '27.00–46.77', sqm: '18.38–17.80' },
+  { zone: '7b', score: 15, hex: '#F2F2F2', lpiRange: '>46.77',      sqm: '<17.80' },
 ]
 
 function hexToRgb(hex) {

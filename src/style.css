@@ -149,6 +149,17 @@ html, body {
   color: #dde4f0;
 }
 
+#search-suggestions li.locate-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #8aabf0;
+}
+
+#search-suggestions li.locate-suggestion:hover {
+  color: #b8ccff;
+}
+
 /* ── Popular label ── */
 
 #popular-label {
@@ -161,25 +172,79 @@ html, body {
 }
 
 /* ── Info body ── */
+/* Desktop: standalone panel below the search bar (positioned in desktop media query).
+   Mobile: lives inside #sheet (no border/background — the sheet provides them). */
 
-#info-body {
-  padding: 1rem;
-  font-size: 1rem;
-  color: #9aa8c8;
-  line-height: 1.6;
-  border-top: 1px solid rgba(120, 140, 200, 0.18);
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem 0.5rem 1rem;
 }
 
-#info-body .info-loading {
-  color: #7080a0;
+.info-header-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-header-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #dde4f0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info-header-subtitle {
+  font-size: 0.85rem;
+  color: #7888a8;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info-header-close {
+  background: none;
+  border: none;
+  color: #7888a8;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
+}
+
+.info-header-close:hover {
+  color: #dde4f0;
+  background: rgba(120, 140, 200, 0.12);
+}
+
+#info-body .info-loading,
+#info-body .info-note {
+  padding: 1rem;
+  font-size: 0.95rem;
   font-style: italic;
+  color: #7080a0;
+  line-height: 1.6;
 }
 
 #info-body .info-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
 }
+
+#info-body .info-row:first-child { padding-top: 0.75rem; }
+#info-body .info-row:last-child  { padding-bottom: 0.75rem; }
 
 #info-body .info-label {
   color: #7888a8;
@@ -190,15 +255,224 @@ html, body {
   font-weight: 500;
 }
 
-#info-body .info-note {
-  font-style: italic;
+/* ── Zone card ── */
+
+.zone-card {
+  padding-bottom: 0.5rem;
+}
+
+.gauge-svg {
+  width: 100%;
+  display: block;
+}
+
+.zone-desc {
+  padding: 0 1.25rem 1rem;
+  font-size: 0.95rem;
+  color: #c0cce4;
+  line-height: 1.6;
+}
+
+.gauge-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid rgba(120, 140, 200, 0.15);
+  border-bottom: 1px solid rgba(120, 140, 200, 0.15);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 400;
   color: #7888a8;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dde4f0;
+}
+
+/* ── Score help link ── */
+
+.score-help-link {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0.75rem 1.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6090e0;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.score-help-link:hover {
+  text-decoration: underline;
+}
+
+/* ── About modal ── */
+
+#about-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#about-modal {
+  background: rgba(10, 10, 20, 0.97);
+  border: 1px solid rgba(120, 140, 200, 0.3);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#about-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba(120, 140, 200, 0.18);
+  flex-shrink: 0;
+}
+
+#about-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dde4f0;
+}
+
+#about-close {
+  background: none;
+  border: none;
+  color: #7888a8;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s;
+}
+
+#about-close:hover {
+  color: #dde4f0;
+}
+
+#about-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#about-body p {
+  font-size: 0.9rem;
+  color: #a0aec8;
+  line-height: 1.65;
+}
+
+#about-body h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #8090b8;
+  margin-top: 0.5rem;
+}
+
+#about-body ul.zone-scale {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+#about-body ul.zone-scale li {
+  font-size: 0.86rem;
+  color: #a0aec8;
+  line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.zone-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  top: 0px;
+  align-self: center;
+}
+
+.zone-label {
+  color: #c8d4f0;
+  font-weight: 600;
+}
+
+#about-body a {
+  color: #6090e0;
+  text-decoration: none;
+}
+
+#about-body a:hover {
+  text-decoration: underline;
+}
+
+.metric-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.metric-list dt {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #c8d4f0;
+}
+
+.metric-list dd {
+  font-size: 0.86rem;
+  color: #a0aec8;
+  line-height: 1.6;
+  margin-left: 0;
+  margin-top: 0.15rem;
+}
+
+.about-attribution {
+  font-size: 0.78rem !important;
+  color: #506080 !important;
+  margin-top: 0.25rem;
 }
 
 /* ── Round icon buttons ── */
 
 #opacity-btn,
-#locate-btn {
+#locate-btn,
+#about-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +490,8 @@ html, body {
 }
 
 #opacity-btn:hover,
-#locate-btn:hover {
+#locate-btn:hover,
+#about-btn:hover {
   background: rgba(40, 55, 110, 0.9);
   color: #dde4f0;
 }
@@ -286,15 +561,6 @@ html, body {
   display: none !important;
 }
 
-.leaflet-control-attribution {
-  background: rgba(10, 10, 20, 0.75) !important;
-  color: #506080 !important;
-  font-size: 10px !important;
-}
-
-.leaflet-control-attribution a {
-  color: #6080b0 !important;
-}
 
 /* ── Mobile ── */
 
@@ -348,11 +614,13 @@ html, body {
     border-top: none;
   }
 
-  /* Bottom sheet — position/height/transform set by JS */
+  /* Bottom modal — fixed 50% height, scroll inside */
   #sheet {
     position: fixed;
     left: 0;
     right: 0;
+    bottom: 0;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     background: rgba(10, 10, 20, 0.95);
@@ -362,40 +630,16 @@ html, body {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     overflow: hidden;
-    z-index: 1000;
-    will-change: transform;
+    z-index: 1200;
   }
 
-  /* Drag handle */
-  #sheet-handle-area {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0 6px;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-  }
-
-  #sheet-handle-area:active {
-    cursor: grabbing;
-  }
-
-  #sheet-handle {
-    width: 36px;
-    height: 4px;
-    background: rgba(120, 140, 200, 0.35);
-    border-radius: 2px;
-  }
-
-  /* Location header inside the sheet */
+  /* Location header inside the modal */
   #sheet-header {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 4px 16px 14px;
-    touch-action: none;
+    padding: 14px 16px;
     user-select: none;
   }
 
@@ -450,33 +694,35 @@ html, body {
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
-  }
-
-  /* Remove top border on info-body inside the sheet (header already separates visually) */
-  #sheet #info-body {
-    border-top: none;
+    overscroll-behavior: contain;
   }
 
   /* Floating controls ride above the sheet via --sheet-h CSS var */
-  #locate-btn {
+  #about-btn {
     position: fixed;
     right: 1rem;
     bottom: calc(var(--sheet-h, 0px) + 0.75rem);
     transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
-  #opacity-btn {
+  #locate-btn {
     position: fixed;
     right: 1rem;
     bottom: calc(var(--sheet-h, 0px) + 4.25rem);
     transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
-  #opacity-wrap {
+  #opacity-btn {
     position: fixed;
     right: 1rem;
     bottom: calc(var(--sheet-h, 0px) + 7.75rem);
+    transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  #opacity-wrap {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(var(--sheet-h, 0px) + 11.25rem);
     transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   }
 }
@@ -488,24 +734,46 @@ html, body {
     position: fixed;
     top: 1rem;
     left: 1rem;
-    width: 320px;
+    width: 380px;
+    z-index: 1100;
+  }
+
+  #info-body {
+    position: fixed;
+    top: calc(1rem + 3rem + 0.5rem);
+    left: 1rem;
+    width: 380px;
+    max-height: calc(100vh - 5.5rem);
+    background: rgba(10, 10, 20, 0.88);
+    border: 1px solid rgba(120, 140, 200, 0.3);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow-y: auto;
+    z-index: 1000;
   }
 
   #locate-btn {
     position: fixed;
     top: 1rem;
-    left: calc(1rem + 320px + 0.5rem);
+    left: calc(1rem + 380px + 0.5rem);
+  }
+
+  #about-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
   }
 
   #opacity-btn {
     position: fixed;
-    bottom: calc(1rem + 6rem + 0.5rem);
+    bottom: calc(1rem + 3rem + 0.5rem + 6rem + 0.5rem);
     right: 1rem;
   }
 
   #opacity-wrap {
     position: fixed;
-    bottom: calc(1rem + 6rem + 0.5rem + 3rem + 0.5rem);
+    bottom: calc(1rem + 3rem + 0.5rem + 6rem + 0.5rem + 3rem + 0.5rem);
     right: 1rem;
   }
 
@@ -513,7 +781,7 @@ html, body {
     display: flex;
     flex-direction: column;
     position: fixed;
-    bottom: 1rem;
+    bottom: calc(1rem + 3rem + 0.5rem);
     right: 1rem;
     background: rgba(10, 10, 20, 0.88);
     border: 1px solid rgba(120, 140, 200, 0.3);
